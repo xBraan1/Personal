@@ -1,0 +1,32 @@
+# FILES TO UPLOAD TO GITHUB
+
+Upload ALL of these files to your GitHub repository.
+
+## ROOT FILES (upload these first):
+- package.json
+- package-lock.json
+- tsconfig.json
+- vite.config.js
+- wrangler.toml
+- index.html
+- .nvmrc
+- .gitignore
+- README.md
+
+## FOLDERS (upload entire folders):
+- src/ (entire folder with all contents)
+- public/ (entire folder with all contents)
+
+## DO NOT UPLOAD:
+- node_modules/ (if it exists)
+- dist/ (if it exists)
+- .git/ (if it exists)
+
+## UPLOAD STEPS:
+1. Go to https://github.com/xBraan1/Portfolio
+2. Click "Add file" → "Upload files"
+3. Drag ALL the files/folders listed above
+4. Click "Commit changes"
+5. Wait for Cloudflare to deploy
+
+That's it. Nothing else needed.
