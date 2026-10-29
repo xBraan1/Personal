@@ -1,5 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { Navigation, Footer, ScrollToTop } from './components/Layout';
@@ -55,34 +56,36 @@ function Layout({ children }: { children: React.ReactNode }) {
 
 export default function App() {
   return (
-    <ThemeProvider>
-      <LanguageProvider>
-        <BrowserRouter>
-          <Layout>
-            <Suspense fallback={<LoadingFallback />}>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/expertise" element={<Expertise />} />
-                <Route path="/services" element={<Services />} />
-                <Route path="/services/:slug" element={<Services />} />
-                <Route path="/experience" element={<Experience />} />
-                <Route path="/work" element={<Work />} />
-                <Route path="/skills" element={<Skills />} />
-                <Route path="/insights" element={<Insights />} />
-                <Route path="/insights/:id" element={<Insights />} />
-                <Route path="/faq" element={<FAQ />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/privacy" element={<Privacy />} />
-                <Route path="/terms" element={<Terms />} />
-                <Route path="/cookies" element={<Cookies />} />
-                <Route path="/thank-you" element={<ThankYou />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </Suspense>
-          </Layout>
-        </BrowserRouter>
-      </LanguageProvider>
-    </ThemeProvider>
+    <HelmetProvider>
+      <ThemeProvider>
+        <LanguageProvider>
+          <BrowserRouter>
+            <Layout>
+              <Suspense fallback={<LoadingFallback />}>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/expertise" element={<Expertise />} />
+                  <Route path="/services" element={<Services />} />
+                  <Route path="/services/:slug" element={<Services />} />
+                  <Route path="/experience" element={<Experience />} />
+                  <Route path="/work" element={<Work />} />
+                  <Route path="/skills" element={<Skills />} />
+                  <Route path="/insights" element={<Insights />} />
+                  <Route path="/insights/:id" element={<Insights />} />
+                  <Route path="/faq" element={<FAQ />} />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route path="/privacy" element={<Privacy />} />
+                  <Route path="/terms" element={<Terms />} />
+                  <Route path="/cookies" element={<Cookies />} />
+                  <Route path="/thank-you" element={<ThankYou />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </Suspense>
+            </Layout>
+          </BrowserRouter>
+        </LanguageProvider>
+      </ThemeProvider>
+    </HelmetProvider>
   );
 }
