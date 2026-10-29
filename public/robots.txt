@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://xbraan1.com/sitemap.xml
