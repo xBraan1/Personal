@@ -1,152 +1,101 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Brain, Target, Zap, Shield } from 'lucide-react';
+import { SEO } from '../components/Layout';
+import { profile, expertiseAreas, caseStudies } from '../data/content';
+import { SignatureLogo } from '../components/SignatureLogo';
+import { Shield, Brain, Target, CheckCircle, ArrowRight } from 'lucide-react';
 
 export default function Home() {
+  const keyExpertise = expertiseAreas.slice(0, 6);
+  const featuredWork = caseStudies.slice(0, 2);
+
   return (
-    <div>
+    <>
+      <SEO
+        title="Brian Kibet — AI Trainer & LLM Evaluation Specialist"
+        description="AI Trainer & LLM Evaluation Specialist with expertise in RLHF, SFT, Prompt Engineering, and Model Quality. 3+ years of remote experience."
+      />
+
       {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center justify-center px-6 lg:px-8">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(30,30,30,0.3)_0%,_transparent_70%)]" />
-        <div className="relative max-w-5xl mx-auto text-center">
-          <div className="animate-fade-in-up opacity-0">
-            <p className="text-sm tracking-[0.3em] uppercase text-[#a0a0a0] mb-6">
-              AI Trainer · LLM Evaluation · Prompt Engineering
-            </p>
-          </div>
-          <h1 className="animate-fade-in-up opacity-0 stagger-1 font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold leading-[1.1] tracking-tight">
-            Precision in every
-            <br />
-            <span className="text-gradient">interaction.</span>
-          </h1>
-          <p className="animate-fade-in-up opacity-0 stagger-2 mt-8 text-lg md:text-xl text-[#a0a0a0] max-w-2xl mx-auto leading-relaxed">
-            I train, evaluate, and refine large language models to deliver accurate, 
-            safe, and aligned AI experiences at scale.
-          </p>
-          <div className="animate-fade-in-up opacity-0 stagger-3 mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              to="/services"
-              className="inline-flex items-center gap-2 px-8 py-3.5 bg-white text-black text-sm font-medium hover:bg-gray-200 transition-colors duration-200"
-            >
-              Explore Services
-              <ArrowRight size={16} />
-            </Link>
-            <Link
-              to="/contact"
-              className="inline-flex items-center gap-2 px-8 py-3.5 border border-[#333] text-white text-sm font-medium hover:border-[#555] hover:bg-[#0a0a0a] transition-colors duration-200"
-            >
-              Get in Touch
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Bar */}
-      <section className="border-y border-[#222] bg-[#050505]">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {[
-              { value: '500K+', label: 'Training Interactions' },
-              { value: '99.2%', label: 'Evaluation Accuracy' },
-              { value: '15+', label: 'Model Families' },
-              { value: '3+', label: 'Years Experience' },
-            ].map((stat, i) => (
-              <div key={i} className="text-center">
-                <p className="text-2xl md:text-3xl font-semibold text-white">{stat.value}</p>
-                <p className="mt-1 text-xs md:text-sm text-[#a0a0a0]">{stat.label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Core Services */}
-      <section className="py-24 lg:py-32 px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="max-w-2xl mb-16">
-            <p className="text-sm tracking-[0.2em] uppercase text-[#a0a0a0] mb-4">Core Services</p>
-            <h2 className="font-serif text-3xl md:text-4xl font-semibold">
-              What I deliver
-            </h2>
-            <p className="mt-4 text-[#a0a0a0] leading-relaxed">
-              Specialized AI training and evaluation services designed for precision, safety, and measurable outcomes.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {[
-              {
-                icon: Brain,
-                title: 'AI Training & RLHF',
-                description: 'High-quality preference data, response ranking, and reinforcement learning from human feedback to align models with human intent.',
-                link: '/services',
-              },
-              {
-                icon: Target,
-                title: 'LLM Evaluation',
-                description: 'Systematic benchmarking, red-teaming, and quality assessment across multiple dimensions of model performance.',
-                link: '/services',
-              },
-              {
-                icon: Zap,
-                title: 'Prompt Engineering',
-                description: 'Crafting optimized prompts, system instructions, and chain-of-thought frameworks for production AI systems.',
-                link: '/services',
-              },
-              {
-                icon: Shield,
-                title: 'Safety & Alignment',
-                description: 'Identifying vulnerabilities, testing edge cases, and ensuring models behave responsibly across diverse scenarios.',
-                link: '/services',
-              },
-            ].map((service, i) => (
-              <Link
-                key={i}
-                to={service.link}
-                className="group p-8 border border-[#222] bg-[#080808] hover:border-[#333] hover:bg-[#0a0a0a] transition-all duration-300"
-              >
-                <service.icon size={24} className="text-[#a0a0a0] group-hover:text-white transition-colors" />
-                <h3 className="mt-6 text-lg font-medium text-white">{service.title}</h3>
-                <p className="mt-3 text-sm text-[#a0a0a0] leading-relaxed">{service.description}</p>
-                <span className="mt-6 inline-flex items-center gap-2 text-sm text-[#666] group-hover:text-white transition-colors">
-                  Learn more <ArrowRight size={14} />
-                </span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Philosophy Section */}
-      <section className="py-24 lg:py-32 px-6 lg:px-8 border-t border-[#222]">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <section className="relative pt-28 lg:pt-40 pb-20 lg:pb-32 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
             <div>
-              <p className="text-sm tracking-[0.2em] uppercase text-[#a0a0a0] mb-4">Philosophy</p>
-              <h2 className="font-serif text-3xl md:text-4xl font-semibold">
-                Quality is not negotiable.
-              </h2>
-              <div className="mt-8 space-y-6">
-                <p className="text-[#a0a0a0] leading-relaxed">
-                  Every training interaction shapes how millions of people experience AI. I approach each task with the understanding that precision at the individual level compounds into trust at scale.
-                </p>
-                <p className="text-[#a0a0a0] leading-relaxed">
-                  My methodology combines rigorous evaluation frameworks with nuanced understanding of language, context, and intent — ensuring that models don't just produce text, but produce <em className="text-white not-italic font-medium">correct</em> text.
-                </p>
+              <div className="inline-flex items-center gap-3 px-4 py-2 border border-white/10 text-neutral-400 text-xs font-light tracking-[0.15em] uppercase mb-8">
+                <span className="w-1.5 h-1.5 bg-white rounded-full" />
+                Available for remote engagements
               </div>
-              <Link
-                to="/about"
-                className="mt-8 inline-flex items-center gap-2 text-sm text-white hover:text-[#a0a0a0] transition-colors"
-              >
-                More about my approach <ArrowRight size={14} />
-              </Link>
+
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-[1.05] mb-6 tracking-tight">
+                {profile.name}
+              </h1>
+
+              <p className="text-xl sm:text-2xl text-neutral-400 font-light mb-6 tracking-wide">
+                {profile.title}
+              </p>
+
+              <p className="text-base text-neutral-500 mb-10 leading-relaxed max-w-xl font-light">
+                {profile.summary}
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link
+                  to="/contact"
+                  className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-white text-black font-medium tracking-wide hover:bg-neutral-200 transition-colors"
+                >
+                  Discuss an Opportunity
+                  <ArrowRight size={16} />
+                </Link>
+                <Link
+                  to="/expertise"
+                  className="inline-flex items-center justify-center gap-2 px-7 py-3.5 border border-white/20 text-white font-light tracking-wide hover:border-white/50 hover:bg-white/5 transition-all"
+                >
+                  Explore My Expertise
+                </Link>
+              </div>
             </div>
-            <div className="relative">
-              <div className="aspect-square bg-[#080808] border border-[#222] flex items-center justify-center">
+
+            {/* Signature Logo Card */}
+            <div className="relative flex items-center justify-center">
+              <div className="relative w-full max-w-md aspect-square flex items-center justify-center border border-white/5 bg-neutral-950">
+                {/* Subtle corner accents */}
+                <div className="absolute top-0 left-0 w-8 h-8 border-t border-l border-white/20" />
+                <div className="absolute top-0 right-0 w-8 h-8 border-t border-r border-white/20" />
+                <div className="absolute bottom-0 left-0 w-8 h-8 border-b border-l border-white/20" />
+                <div className="absolute bottom-0 right-0 w-8 h-8 border-b border-r border-white/20" />
+                
                 <div className="text-center p-8">
-                  <p className="font-serif text-6xl md:text-7xl text-white/10">x</p>
-                  <p className="font-serif text-5xl md:text-6xl text-white font-semibold -mt-4">Braan1</p>
-                  <div className="mt-6 w-16 h-px bg-[#333] mx-auto" />
-                  <p className="mt-6 text-xs tracking-[0.3em] uppercase text-[#666]">Precision · Safety · Scale</p>
+                  <SignatureLogo width={200} color="#FFFFFF" />
+                  
+                  <div className="mt-10 space-y-6">
+                    {/* Stats */}
+                    <div className="grid grid-cols-2 gap-6">
+                      <div>
+                        <p className="text-3xl font-bold text-white">{profile.stats.yearsExperience}</p>
+                        <p className="text-xs text-neutral-500 mt-1 font-light tracking-wide uppercase">Years</p>
+                      </div>
+                      <div>
+                        <p className="text-3xl font-bold text-white">{profile.stats.dataPointsAnnotated}</p>
+                        <p className="text-xs text-neutral-500 mt-1 font-light tracking-wide uppercase">Data Points</p>
+                      </div>
+                      <div>
+                        <p className="text-3xl font-bold text-white">{profile.stats.qualityScore}</p>
+                        <p className="text-xs text-neutral-500 mt-1 font-light tracking-wide uppercase">Quality</p>
+                      </div>
+                      <div>
+                        <p className="text-3xl font-bold text-white">3</p>
+                        <p className="text-xs text-neutral-500 mt-1 font-light tracking-wide uppercase">Modalities</p>
+                      </div>
+                    </div>
+
+                    {/* Tags */}
+                    <div className="flex flex-wrap gap-2 justify-center">
+                      {['RLHF', 'SFT', 'Prompt Engineering', 'Model Quality', 'AI Safety'].map(tag => (
+                        <span key={tag} className="px-3 py-1 border border-white/10 text-neutral-400 text-xs font-light tracking-wider">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -154,25 +103,161 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-24 lg:py-32 px-6 lg:px-8 border-t border-[#222] bg-[#050505]">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="font-serif text-3xl md:text-4xl font-semibold">
-            Ready to elevate your AI?
-          </h2>
-          <p className="mt-6 text-[#a0a0a0] leading-relaxed">
-            Whether you need model evaluation, training data, or prompt optimization — 
-            let's discuss how precision AI work can accelerate your product.
-          </p>
-          <Link
-            to="/contact"
-            className="mt-10 inline-flex items-center gap-2 px-8 py-3.5 bg-white text-black text-sm font-medium hover:bg-gray-200 transition-colors duration-200"
-          >
-            Start a Conversation
-            <ArrowRight size={16} />
-          </Link>
+      {/* Divider */}
+      <div className="signature-line max-w-7xl mx-auto" />
+
+      {/* Proof Points */}
+      <section className="py-20 lg:py-28">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <p className="text-xs uppercase tracking-[0.2em] text-neutral-500 mb-4">What I Bring</p>
+            <h2 className="text-3xl lg:text-4xl font-bold text-white tracking-tight">
+              Evaluation Excellence
+            </h2>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-white/5">
+            {[
+              { icon: Brain, title: 'Deep Evaluation', desc: 'Multi-dimensional assessment across helpfulness, accuracy, safety, and instruction following.' },
+              { icon: Shield, title: 'Safety Focus', desc: 'Systematic identification of harmful, biased, or policy-violating content.' },
+              { icon: Target, title: 'Quality Driven', desc: 'Consistent quality scores above 95% through rigorous self-review and calibration.' },
+              { icon: CheckCircle, title: 'Reliable Delivery', desc: '3+ years of dependable remote work with structured async collaboration.' },
+            ].map(({ icon: Icon, title, desc }) => (
+              <div key={title} className="p-8 lg:p-10 bg-black hover:bg-neutral-950 transition-colors group">
+                <Icon size={24} className="text-white mb-6" strokeWidth={1.5} />
+                <h3 className="font-medium text-white mb-3 tracking-wide">{title}</h3>
+                <p className="text-sm text-neutral-500 leading-relaxed font-light">{desc}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
-    </div>
+
+      {/* Expertise Overview */}
+      <section className="py-20 lg:py-28 border-t border-white/5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-end justify-between mb-14">
+            <div>
+              <p className="text-xs uppercase tracking-[0.2em] text-neutral-500 mb-4">Capabilities</p>
+              <h2 className="text-3xl lg:text-4xl font-bold text-white tracking-tight">
+                Core Expertise
+              </h2>
+            </div>
+            <Link
+              to="/expertise"
+              className="hidden sm:inline-flex items-center gap-2 text-neutral-400 hover:text-white text-sm font-light tracking-wide transition-colors"
+            >
+              View all <ArrowRight size={14} />
+            </Link>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-white/5">
+            {keyExpertise.map(area => (
+              <div
+                key={area.id}
+                className="p-7 bg-black hover:bg-neutral-950 transition-colors group"
+              >
+                <span className="text-[10px] font-medium text-neutral-500 uppercase tracking-[0.2em]">{area.category}</span>
+                <h3 className="font-medium text-white mt-3 mb-3 tracking-wide group-hover:text-neutral-300 transition-colors">
+                  {area.title}
+                </h3>
+                <p className="text-sm text-neutral-500 leading-relaxed font-light line-clamp-3">
+                  {area.description}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-8 text-center sm:text-left">
+            <Link
+              to="/expertise"
+              className="inline-flex items-center gap-2 text-neutral-400 hover:text-white text-sm font-light tracking-wide transition-colors sm:hidden"
+            >
+              View all expertise <ArrowRight size={14} />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Selected Work Preview */}
+      <section className="py-20 lg:py-28 border-t border-white/5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-end justify-between mb-14">
+            <div>
+              <p className="text-xs uppercase tracking-[0.2em] text-neutral-500 mb-4">Portfolio</p>
+              <h2 className="text-3xl lg:text-4xl font-bold text-white tracking-tight">
+                Selected Work
+              </h2>
+            </div>
+            <Link
+              to="/work"
+              className="hidden sm:inline-flex items-center gap-2 text-neutral-400 hover:text-white text-sm font-light tracking-wide transition-colors"
+            >
+              View all <ArrowRight size={14} />
+            </Link>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {featuredWork.map(study => (
+              <Link
+                key={study.id}
+                to={`/work#${study.id}`}
+                className="block p-8 border border-white/5 hover:border-white/20 transition-all group bg-neutral-950"
+              >
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {study.tags.map(tag => (
+                    <span key={tag} className="px-2.5 py-1 border border-white/10 text-neutral-400 text-xs font-light tracking-wider">
+                      {tag}
+                    </span>
+                  ))}
+                  <span className="px-2.5 py-1 border border-white/5 text-neutral-600 text-xs font-light tracking-wider">
+                    Illustrative
+                  </span>
+                </div>
+                <h3 className="text-xl font-medium text-white mb-4 tracking-wide group-hover:text-neutral-300 transition-colors">
+                  {study.title}
+                </h3>
+                <p className="text-sm text-neutral-500 leading-relaxed mb-6 font-light">
+                  {study.context}
+                </p>
+                <span className="inline-flex items-center gap-2 text-white text-sm font-light tracking-wide">
+                  Read more <ArrowRight size={14} />
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 lg:py-28 border-t border-white/5">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="border border-white/10 p-10 lg:p-16">
+            <SignatureLogo width={160} color="#FFFFFF" className="mx-auto mb-10 opacity-60" />
+            <h2 className="text-3xl font-bold text-white mb-5 tracking-tight">
+              Let's Work Together
+            </h2>
+            <p className="text-neutral-400 mb-10 max-w-lg mx-auto font-light leading-relaxed">
+              Whether you need LLM evaluation, RLHF annotation, SFT data creation, or quality assurance — I'm available for remote engagements and contract opportunities.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                to="/contact"
+                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-white text-black font-medium tracking-wide hover:bg-neutral-200 transition-colors"
+              >
+                Discuss an Opportunity
+                <ArrowRight size={16} />
+              </Link>
+              <Link
+                to="/services"
+                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 border border-white/20 text-white font-light tracking-wide hover:border-white/50 hover:bg-white/5 transition-all"
+              >
+                Explore Services
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }

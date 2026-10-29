@@ -1,95 +1,97 @@
-import { Brain, Target, Shield, Zap, MessageSquare, Code, BarChart3, Globe } from 'lucide-react';
+import { Breadcrumbs, SEO } from '../components/Layout';
+import { expertiseAreas } from '../data/content';
+import { useState } from 'react';
 
-const expertiseAreas = [
-  {
-    icon: Brain,
-    title: 'Reinforcement Learning from Human Feedback (RLHF)',
-    description: 'Creating high-quality preference datasets that teach models to generate helpful, honest, and harmless responses. Expert in pairwise comparison, response ranking, and detailed critique annotation.',
-    tags: ['Preference Data', 'Response Ranking', 'Critique Writing', 'Constitutional AI'],
-  },
-  {
-    icon: Target,
-    title: 'LLM Evaluation & Benchmarking',
-    description: 'Designing and executing comprehensive evaluation frameworks across factual accuracy, reasoning quality, instruction following, safety compliance, and output consistency.',
-    tags: ['Benchmarking', 'Red Teaming', 'Quality Metrics', 'Error Analysis'],
-  },
-  {
-    icon: Shield,
-    title: 'AI Safety & Alignment',
-    description: 'Identifying model vulnerabilities, testing adversarial inputs, and ensuring AI systems behave responsibly across edge cases, cultural contexts, and sensitive domains.',
-    tags: ['Red Teaming', 'Jailbreak Testing', 'Bias Detection', 'Content Safety'],
-  },
-  {
-    icon: Zap,
-    title: 'Prompt Engineering & Optimization',
-    description: 'Crafting production-grade prompts, system instructions, and chain-of-thought frameworks that maximize model capability while maintaining reliability and consistency.',
-    tags: ['System Prompts', 'Chain-of-Thought', 'Few-Shot Design', 'Template Engineering'],
-  },
-  {
-    icon: MessageSquare,
-    title: 'Conversational AI Design',
-    description: 'Designing dialogue flows, persona consistency frameworks, and multi-turn interaction patterns that create natural, helpful, and contextually aware conversations.',
-    tags: ['Dialogue Design', 'Persona Systems', 'Multi-Turn', 'Context Management'],
-  },
-  {
-    icon: Code,
-    title: 'Code Generation & Review',
-    description: 'Training and evaluating models on code generation tasks across multiple programming languages, with focus on correctness, security, documentation, and best practices.',
-    tags: ['Python', 'JavaScript', 'Code Review', 'Debugging'],
-  },
-  {
-    icon: BarChart3,
-    title: 'Data Quality & Annotation',
-    description: 'Establishing annotation guidelines, quality control frameworks, and inter-annotator agreement metrics for large-scale training data production.',
-    tags: ['Annotation Guidelines', 'QA Frameworks', 'IAA Metrics', 'Data Curation'],
-  },
-  {
-    icon: Globe,
-    title: 'Multilingual AI',
-    description: 'Evaluating and training models across languages with deep understanding of cultural context, idiomatic expression, and linguistic nuance in both English and Arabic.',
-    tags: ['English', 'Arabic', 'Cross-Lingual', 'Cultural Context'],
-  },
-];
+const categories = [...new Set(expertiseAreas.map(a => a.category))];
 
 export default function Expertise() {
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const filtered = expertiseAreas.filter(area => {
+    const matchesCategory = !activeCategory || area.category === activeCategory;
+    const matchesSearch = !searchQuery || 
+      area.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      area.description.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
+
   return (
-    <div className="py-24 lg:py-32 px-6 lg:px-8">
+    <div className="py-28 lg:py-36 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
+        <SEO title="Expertise — Brian Kibet" description="Core expertise areas in AI training, LLM evaluation, and model quality." />
+        <Breadcrumbs items={[{ label: 'Expertise' }]} />
+
         {/* Header */}
-        <div className="max-w-3xl mb-20">
-          <p className="text-sm tracking-[0.2em] uppercase text-[#a0a0a0] mb-4">Expertise</p>
-          <h1 className="font-serif text-4xl md:text-5xl font-semibold">
+        <div className="max-w-3xl mb-12">
+          <p className="text-xs uppercase tracking-[0.2em] text-neutral-500 mb-4">Expertise</p>
+          <h1 className="font-bold text-4xl md:text-5xl text-white tracking-tight">
             Deep specialization across the AI training landscape.
           </h1>
-          <p className="mt-6 text-lg text-[#a0a0a0] leading-relaxed">
+          <p className="mt-6 text-lg text-neutral-400 leading-relaxed font-light">
             My expertise spans the full lifecycle of AI model development — from data collection 
             and annotation through evaluation, safety testing, and production optimization.
           </p>
         </div>
 
-        {/* Expertise Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {expertiseAreas.map((area, i) => (
-            <div
-              key={i}
-              className="group p-8 border border-[#222] bg-[#080808] hover:border-[#333] transition-all duration-300"
+        {/* Search & Filter */}
+        <div className="flex flex-col sm:flex-row gap-4 mb-10">
+          <input
+            type="text"
+            placeholder="Search expertise areas..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="flex-1 px-4 py-3 bg-neutral-950 border border-white/5 text-white text-sm font-light placeholder:text-neutral-600 focus:border-white/20 focus:outline-none transition-colors"
+          />
+          <div className="flex flex-wrap gap-2">
+            <button
+              onClick={() => setActiveCategory(null)}
+              className={`px-4 py-2 text-xs font-light tracking-wider border transition-colors ${
+                !activeCategory ? 'border-white text-white' : 'border-white/10 text-neutral-400 hover:border-white/30'
+              }`}
             >
-              <area.icon size={24} className="text-[#666] group-hover:text-white transition-colors" />
-              <h3 className="mt-6 text-lg font-medium text-white">{area.title}</h3>
-              <p className="mt-3 text-sm text-[#a0a0a0] leading-relaxed">{area.description}</p>
-              <div className="mt-6 flex flex-wrap gap-2">
-                {area.tags.map((tag, j) => (
-                  <span
-                    key={j}
-                    className="px-3 py-1 text-xs text-[#a0a0a0] border border-[#222] bg-[#0a0a0a]"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
+              All
+            </button>
+            {categories.map(cat => (
+              <button
+                key={cat}
+                onClick={() => setActiveCategory(activeCategory === cat ? null : cat)}
+                className={`px-4 py-2 text-xs font-light tracking-wider border transition-colors ${
+                  activeCategory === cat ? 'border-white text-white' : 'border-white/10 text-neutral-400 hover:border-white/30'
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Expertise Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/5">
+          {filtered.map((area) => (
+            <div
+              key={area.id}
+              className="p-7 bg-black hover:bg-neutral-950 transition-colors group"
+            >
+              <span className="text-[10px] font-medium text-neutral-500 uppercase tracking-[0.2em]">{area.category}</span>
+              <h3 className="font-medium text-white mt-3 mb-3 tracking-wide group-hover:text-neutral-300 transition-colors">
+                {area.title}
+              </h3>
+              <p className="text-sm text-neutral-500 leading-relaxed font-light mb-4">
+                {area.description}
+              </p>
+              <p className="text-xs text-neutral-600 leading-relaxed font-light italic">
+                {area.relevance}
+              </p>
             </div>
           ))}
         </div>
+
+        {filtered.length === 0 && (
+          <div className="text-center py-16">
+            <p className="text-neutral-500 font-light">No expertise areas match your search.</p>
+          </div>
+        )}
       </div>
     </div>
   );
